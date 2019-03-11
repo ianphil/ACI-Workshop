@@ -18,7 +18,7 @@ namespace send
                                         exclusive: false,
                                         autoDelete: false,
                                         arguments: null);
-
+                    // TODO: Send Fibonacci sequence 
                     string message = "Hello world!";
                     var body = Encoding.UTF8.GetBytes(message);
 
