@@ -13,17 +13,14 @@ namespace send
             {
                 using (var channel = connection.CreateModel())
                 {
-                    channel.QueueDeclare(queue: "hello",
-                                        durable: false,
-                                        exclusive: false,
-                                        autoDelete: false,
-                                        arguments: null);
+                    channel.ExchangeDeclare(exchange: "events", type: "fanout");
+                    
                     // TODO: Send Fibonacci sequence 
                     string message = "Hello world!";
                     var body = Encoding.UTF8.GetBytes(message);
 
-                    channel.BasicPublish(exchange: "",
-                                        routingKey: "hello",
+                    channel.BasicPublish(exchange: "events",
+                                        routingKey: "",
                                         basicProperties: null,
                                         body: body);
                     
