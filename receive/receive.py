@@ -3,14 +3,14 @@
 import pika
 from pymongo import MongoClient
 
-connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
+connection = pika.BlockingConnection(pika.ConnectionParameters('some-rabbit'))
 channel = connection.channel()
 channel.exchange_declare(exchange='events', exchange_type='fanout')
 result = channel.queue_declare(exclusive=True)
 queue_name = result.method.queue
 channel.queue_bind(exchange='events', queue=queue_name)
 
-client = MongoClient('mongodb://localhost:27017/')
+client = MongoClient('mongodb://some-mongo:27017/')
 db = client.offsite
 col = db.events
 

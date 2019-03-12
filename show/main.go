@@ -10,7 +10,7 @@ import (
 	"github.com/streadway/amqp"
 )
 
-var addr = flag.String("addr", "localhost:8080", "http service address")
+var addr = flag.String("addr", ":8080", "http service address")
 
 var upgrader = websocket.Upgrader{} // use default options
 
@@ -21,7 +21,7 @@ func failOnError(err error, msg string) {
 }
 
 func echo(w http.ResponseWriter, r *http.Request) {
-	conn, err := amqp.Dial("amqp://guest:guest@localhost:5672/")
+	conn, err := amqp.Dial("amqp://guest:guest@some-rabbit:5672/")
 	failOnError(err, "Failed to connect to RabbitMQ")
 	defer conn.Close()
 
