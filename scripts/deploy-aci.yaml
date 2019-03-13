@@ -1,0 +1,36 @@
+apiVersion: 2018-06-01
+location: eastus
+name: eastOffsiteGroup
+properties:
+  containers:
+  - name: send
+    properties:
+      image: tripdubroot/send:aci
+      resources:
+        requests:
+          cpu: 1
+          memoryInGb: 1.5
+  - name: receive
+    properties:
+      image: tripdubroot/receive:aci
+      resources:
+        requests:
+          cpu: 1
+          memoryInGb: 1.5
+  - name: show
+    properties:
+      image: tripdubroot/show:aci
+      resources:
+        requests:
+          cpu: 1
+          memoryInGb: 1.5
+      ports:
+      - port: 8080
+  osType: Linux
+  ipAddress:
+    type: Public
+    ports:
+    - protocol: tcp
+      port: '8080'
+tags: null
+type: Microsoft.ContainerInstance/containerGroups
